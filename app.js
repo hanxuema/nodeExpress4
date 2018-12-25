@@ -3,6 +3,8 @@ var debug = require("debug")("app");
 var path = require("path");
 
 var app = express();
+const port = process.env.PORT || 3000;
+const bookRouter = express.Router();
 
 app.use(express.static(path.join(__dirname, "/public/")));
 app.use(
@@ -20,14 +22,27 @@ app.use(
 );
 app.set("views", __dirname + "/views");
 // app.set("views","./src/views");
-app.set("view engine", "pug");
+app.set("view engine", "ejs");
+
+bookRouter.route('/')
+  .get((req, res)=>{
+    res.send('hello books')
+  });
+
+  bookRouter.route('/single')
+  .get((req, res)=>{
+    res.send('hello single books')
+  });
+
+app.use('/books', bookRouter);
 
 app.get("/", (req, res) => {
-  res.render("index");
-  // res.render('index', {
-  //   nav:['Books','Authors'],
-  //   title: 'Library'
-  // })
+  res.render('index', {
+    nav:[ 
+      {link: '/books', title : 'Books'},
+      {link: '/authors', title : 'Authors'}],
+    title: 'Library'
+  })
   // res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 

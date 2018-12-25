@@ -1,7 +1,13 @@
 html    
     head
         title MyApp
-    body
-        h1 My App
+    body(class=['myClass'])
+        h1(id='MyId')= title  
         p
             h3 sub header   
+        ul
+          <%for(let i=0; i< nav.length; i++) {%>
+            <li>
+                    <a href="<%=nav[i].link%>"<%=nav[i].title%>
+            </li>
+          <%}%>
