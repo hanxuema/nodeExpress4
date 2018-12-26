@@ -1,9 +1,30 @@
+//loading package
 var express = require("express");
 var debug = require("debug")("app");
 var path = require("path");
+var sql = require("mssql");
 
+//config
 var app = express();
 const port = process.env.PORT || 3000;
+const config = {
+  user: "xavier",
+  password: "+Gehai2022",
+  server: "xadventureworks.database.windows.net", // You can use 'localhost\\instance' to connect to named instance
+  database: "AdventureWorks",
+
+  options: {
+    encrypt: true // Use this if you're on Windows Azure
+  }
+};
+//setup
+ sql.connect(config).catch(err => debug(err));
+// const request = new sql.Request();
+// request.query("select * from saleslt.product").then(result => {
+//   console.log(request);
+// });
+
+
 
 app.use(express.static(path.join(__dirname, "/public/")));
 app.use(
