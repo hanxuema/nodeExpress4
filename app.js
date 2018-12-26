@@ -22,18 +22,23 @@ app.use(
 app.set("views", __dirname + "/src/views");
 // app.set("views","./src/views");
 app.set("view engine", "ejs");
- 
 
-const bookRouter = require('./src/routes/bookRoutes');
-app.use('/books', bookRouter);
+const nav = [
+  { link: "/books", title: "Books" },
+  { link: "/authors", title: "Authors" }
+];
+
+const bookRouter = require("./src/routes/bookRoutes")(nav);
+app.use("/books", bookRouter);
 
 app.get("/", (req, res) => {
-  res.render('index', {
-    nav:[ 
-      {link: '/books', title : 'Books'},
-      {link: '/authors', title : 'Authors'}],
-    title: 'Library'
-  })
+  res.render("index", {
+    nav: [
+      { link: "/books", title: "Books" },
+      { link: "/authors", title: "Authors" }
+    ],
+    title: "Library"
+  });
   // res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
