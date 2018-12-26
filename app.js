@@ -4,7 +4,6 @@ var path = require("path");
 
 var app = express();
 const port = process.env.PORT || 3000;
-const bookRouter = express.Router();
 
 app.use(express.static(path.join(__dirname, "/public/")));
 app.use(
@@ -20,20 +19,12 @@ app.use(
   "/js",
   express.static(path.join(__dirname, "/node_modules/jquery/dist"))
 );
-app.set("views", __dirname + "/views");
+app.set("views", __dirname + "/src/views");
 // app.set("views","./src/views");
 app.set("view engine", "ejs");
+ 
 
-bookRouter.route('/')
-  .get((req, res)=>{
-    res.send('hello books')
-  });
-
-  bookRouter.route('/single')
-  .get((req, res)=>{
-    res.send('hello single books')
-  });
-
+const bookRouter = require('./src/routes/bookRoutes');
 app.use('/books', bookRouter);
 
 app.get("/", (req, res) => {

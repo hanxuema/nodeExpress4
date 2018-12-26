@@ -1,0 +1,7 @@
+<ul>
+        <%for(let i=0; i< books.length; i++) {%>
+          <li>
+                <%=books[i].author%> <a href="<%=books[i].link%>"><%=books[i].title%></a>
+          </li>
+        <%}%>
+</ul>
