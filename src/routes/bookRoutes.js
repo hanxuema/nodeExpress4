@@ -41,9 +41,9 @@ bookRouter.route("/:id").get((req, res) => {
           { link: "/authors", title: "Authors" }
         ],
         title: "Library",
-        books: books[id]
+        book: books[id]
       }); 
-  res.send("hello single books");
+  //res.send("hello single books");
 });
 
 module.exports = bookRouter;
